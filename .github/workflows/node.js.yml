@@ -1,0 +1,22 @@
+name: Katheryn (commons) library
+
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: building katheryn (commons)
+        run: npm i && npm run build
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: testing katheryn (commons)
+        run: npm i && npm run test

@@ -1,0 +1,10 @@
+server:
+  port: 6000
+database:
+  port: 6000
+  database: katheryn-tests
+  username: katheryn-tests
+  password: katheryn-tests
+constants:
+  SOME_CONSTANT: SOME_CONSTANT_VALUE
+  SOME_OTHER_CONSTANT: SOME_OTHER_CONSTANT_VALUE
