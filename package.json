@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "description": "katheryn's common code",
   "main": "build/lib/index.js",
+  "types": "build/lib/index.d.ts",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "ttsc",
+    "build": "rm -rf ./build && ttsc",
     "eslint": "eslint --ext=ts lib tests",
     "pretest": "export TS_NODE_FILES=true",
     "test": "npm run pretest && nyc --reporter lcov ava"
