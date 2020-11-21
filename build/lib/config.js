@@ -16,7 +16,8 @@ const promises_1 = require("fs/promises");
 exports.get = (path) => __awaiter(void 0, void 0, void 0, function* () {
     const configPath = path !== undefined
         ? path
-        : path_1.join('..', 'config/default.yml');
+        : path_1.join(process.cwd(), 'config/default.yml');
+    console.log(configPath);
     const contents = yield promises_1.readFile(configPath);
     return js_yaml_1.load(contents.toString());
 });
