@@ -34,7 +34,9 @@ export interface Config {
 export const get = async (path?: string): Promise<Config> => {
   const configPath = path !== undefined
     ? path
-    : join('..', 'config/default.yml')
+    : join(process.cwd(), 'config/default.yml')
+
+  console.log(configPath)
 
   const contents = await readFile(configPath)
 
