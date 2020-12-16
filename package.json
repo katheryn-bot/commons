@@ -1,7 +1,7 @@
 {
-  "name": "@katheryn/commons",
+  "name": "@katheryne/commons",
   "version": "0.1.0",
-  "description": "katheryn's common code",
+  "description": "katheryne's common code",
   "main": "build/lib/index.js",
   "types": "build/lib/index.d.ts",
   "license": "MIT",
