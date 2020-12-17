@@ -13,9 +13,10 @@ exports.LoggerMiddleware = exports.format = void 0;
 const common_1 = require("@nestjs/common");
 const __1 = require("../../");
 const response_time_1 = __importDefault(require("response-time"));
-exports.format = ({ time, path, method, }) => {
+const format = ({ time, path, method, }) => {
     return `A ${method} request was made to: ${path} | ${time}`;
 };
+exports.format = format;
 let LoggerMiddleware = class LoggerMiddleware {
     use(req, res, next) {
         const respTime = res.getHeader('X-Response-Time');

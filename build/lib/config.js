@@ -13,7 +13,7 @@ exports.get = void 0;
 const path_1 = require("path");
 const js_yaml_1 = require("js-yaml");
 const promises_1 = require("fs/promises");
-exports.get = (path) => __awaiter(void 0, void 0, void 0, function* () {
+const get = (path) => __awaiter(void 0, void 0, void 0, function* () {
     const configPath = path !== undefined
         ? path
         : path_1.join(process.cwd(), 'config/default.yml');
@@ -21,3 +21,4 @@ exports.get = (path) => __awaiter(void 0, void 0, void 0, function* () {
     const contents = yield promises_1.readFile(configPath);
     return js_yaml_1.load(contents.toString());
 });
+exports.get = get;
