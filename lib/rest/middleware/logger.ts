@@ -39,11 +39,11 @@ export const format = ({
 export class LoggerMiddleware implements NestMiddleware {
 
   use (req: Request, res: Response, next: Function) {
-    const respTime = res.getHeader('X-Response-Time')
-    const { path, method } = req
-    res.app.use(responseTime())
-
     let time = ''
+    res.app.use(responseTime())
+    const { path, method } = req
+
+    const respTime = res.getHeader('X-Response-Time')
 
     if (respTime !== undefined) {
       time += `${res.statusMessage} (${respTime.toString()})`
