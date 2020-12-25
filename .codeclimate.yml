@@ -1,0 +1,4 @@
+## ignoring compiled JS files
+exlude_patterns:
+  - build/lib/*.js
+  - build/lib/**/*.js

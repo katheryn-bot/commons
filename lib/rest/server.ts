@@ -5,6 +5,7 @@ import {
   MiddlewareConsumer,
 } from '@nestjs/common'
 import { LoggerMiddleware } from './middleware/logger'
+import { ParserMiddleware } from './middleware/parser'
 
 import { TypeORMProvider } from './providers/typeorm'
 
@@ -16,7 +17,10 @@ export class CommonModule implements NestModule {
 
   public configure (consumer: MiddlewareConsumer): void {
     consumer
-      .apply(LoggerMiddleware)
+      .apply(...[
+        LoggerMiddleware,
+        ParserMiddleware,
+      ])
       .forRoutes({
         path: '/',
         method: RequestMethod.ALL,
