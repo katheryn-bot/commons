@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "rm -rf ./build && ttsc",
+    "build": "rm -rf ./dist && ttsc",
     "eslint": "eslint --ext=ts lib tests",
     "pretest": "export TS_NODE_FILES=true",
     "test": "npm run pretest && nyc --reporter lcov ava"

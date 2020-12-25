@@ -3,7 +3,7 @@
   "compilerOptions": {
     "declaration": true,
     "rootDir": "./",
-    "outDir": "./build",
+    "outDir": "./dist",
     "baseUrl": "./lib",
     "paths": {
       "@*": [
@@ -13,6 +13,6 @@
   },
   "include": [
     "index.d.ts",
-    "lib/**/*.ts",
+    "lib/**/*.ts"
   ]
 }

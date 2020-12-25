@@ -12,7 +12,7 @@ import bodyParser from 'body-parser'
 @Injectable()
 export class ParserMiddleware implements NestMiddleware {
 
-  use (req: Request, _: Response, next: Function) {
+  use (req: Request, _req: Response, next: Function) {
     req.app.use(bodyParser.json())
     req.app.use(bodyParser.urlencoded())
 

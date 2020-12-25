@@ -1,22 +1,26 @@
 import puppeteer from 'puppeteer'
-import {
-  Page,
-  Browser,
-} from 'puppeteer'
 
 export interface Instance {
-  page: Page,
-  browser: Browser,
+  page: puppeteer.Page
+  browser: puppeteer.Browser
   shutdown: () => Promise<void>
 }
 
-export const createInstance = async (url: string, path = ''): Promise<Instance> => {
-  const instanceUrl = `${url}/${path}`
+export const createInstance = async (
+  url: string,
+  path: string,
+): Promise<Instance> => {
+  const instanceUrl = `${url}/${path ?? ''}`
 
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch({
+    // comment if you're not running WSL2
+    executablePath: '/usr/bin/chromedriver',
+  })
+
   const page = await browser.newPage()
+
   await page.goto(instanceUrl, {
-    waitUntil: 'load'
+    waitUntil: 'load',
   })
 
   return {
@@ -24,6 +28,6 @@ export const createInstance = async (url: string, path = ''): Promise<Instance> 
     page,
     shutdown: async (): Promise<void> => {
       await browser.close()
-    }
+    },
   }
 }
