@@ -1,0 +1,11 @@
+server:
+  port: 8000
+  host: sometest.net
+database:
+  port: 5432
+  database: testing-db
+  username: testing-username
+  password: testing-password123
+constants:
+  testing: this is a very fun test!
+  testing_nope: this is very aids...

@@ -13,8 +13,15 @@ export const createInstance = async (
   const instanceUrl = `${url}/${path ?? ''}`
 
   const browser = await puppeteer.launch({
-    // comment if you're not running WSL2
-    executablePath: '/usr/bin/chromedriver',
+    args: [
+      '--disable-gpu',
+      '--disable-dev-shm-usage',
+      '--disable-setuid-sandbox',
+      '--no-first-run',
+      '--no-sandbox',
+      '--no-zygote',
+      '--single-process',
+    ],
   })
 
   const page = await browser.newPage()
@@ -27,6 +34,7 @@ export const createInstance = async (
     browser,
     page,
     shutdown: async (): Promise<void> => {
+      await page.close()
       await browser.close()
     },
   }
