@@ -7,5 +7,5 @@ database:
   username: testing-username
   password: testing-password123
 constants:
+  value: SOME_CONSTANT_VALUE
   testing: this is a very fun test!
-  testing_nope: this is very aids...
