@@ -1,9 +1,9 @@
 import test from 'ava'
 import { join } from 'path'
-import { load as getConfig } from '../lib'
+import { load as getConfig } from '../src'
 import { CONSTANT_VALUE } from './data/constants'
 
-test ('fetch config details', async (t) => {
+test ('(UNIT) config | FETCH DETAILS', async (t) => {
   const {
     server,
     database,
@@ -16,3 +16,6 @@ test ('fetch config details', async (t) => {
   t.true(constants.testing.includes('very fun'))
 })
 
+test ('(UNIT) config | INVALID PATH', async (t) => {
+  await t.throwsAsync(getConfig('some/path/default.yml'))
+})
