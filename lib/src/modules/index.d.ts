@@ -1,2 +1,1 @@
-export { Cache } from './cacher';
-export { createInstance } from './scrapper';
+export * as scrapper from './scrapper';

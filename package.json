@@ -2,12 +2,12 @@
   "name": "@katheryne/commons",
   "version": "0.1.0",
   "description": "katheryne's common code",
-  "main": "build/lib/index.js",
-  "types": "build/lib/index.d.ts",
+  "main": "lib/src/index.js",
+  "types": "lib/src/index.d.ts",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "rm -rf ./dist && ttsc",
+    "build": "rm -rf ./lib && ttsc",
     "eslint": "eslint --ext=ts lib tests",
     "pretest": "export TS_NODE_FILES=true",
     "test": "npm run pretest && nyc --reporter lcov ava"
