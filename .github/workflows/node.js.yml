@@ -10,12 +10,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: building katheryn (commons)
+      - uses: actions/checkout@master
+      - name: building katheryne (commons)
         run: npm i && npm run build
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: testing katheryn (commons)
+      - uses: actions/checkout@master
+      - name: testing katheryne (commons)
         run: npm i && npm run test

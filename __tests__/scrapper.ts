@@ -18,11 +18,15 @@ test ('(UNIT) scrape-utils: CHEERIO | FETCH DATA', async (t) => {
   t.is(weaponTitle, 'Amos\' Bow')
 })
 
-test.skip('(UNIT) scrape-utils: PUPPET | FETCH DATA', async (t) => {
-  const instance = await scrapper.getPuppetInstance(`${TESTING_URL}/Amos'_Bow`)
+// testing this later...
+// test.skip('(UNIT) scrape-utils: PUPPET | FETCH DATA', async (t) => {
+//   const page = await scrapper.getPuppetInstance(`${TESTING_URL}/Amos'_Bow`)
 
-  const weaponTitle = await (await instance.$('h2.pi-item.pi-title'))
-    .evaluate(() => document.documentElement.innerText)
+//   const weaponTitle = await page.evaluate(() =>
+//     document !== null || document !== undefined
+//       ? document.querySelector('h2.pi-item.pi-title').textContent
+//       : 'invalid-port'
+//   )
 
-  t.is(weaponTitle, 'Amos\' Bow')
-})
+//   t.is(weaponTitle, 'Amos\' Bow')
+// })
