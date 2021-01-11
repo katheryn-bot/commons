@@ -1,0 +1,38 @@
+name: Katheryne's Commons CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  install:
+    name: installing deps
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v14
+        run: npm install
+  build:
+    needs: install
+    name: building lib
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v14
+        run: npm run build
+  test:
+    needs: install
+    name: testing lib
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v14
+        run: npm run test
+  coverage:
+    needs: [ install, test ]
+    name: publishing coverage to codeclimate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: 377d361f65561e14524d09d6b0ab938a2bebc37c144cb9230d1f9470119d45f5
+
