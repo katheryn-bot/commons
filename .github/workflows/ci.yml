@@ -1,4 +1,4 @@
-name: Katheryne's Commons CI
+name: build and test
 
 on:
   push:
@@ -16,6 +16,11 @@ jobs:
           node-version: 12
       - name: installing deps
         run: npm install
+      - name: uploading modules
+        uses: actions/upload-artifact@v2
+        with:
+          name: modules
+          path: ./node_modules
       - uses: actions/cache@v2
         name: cache deps
         env:
@@ -35,6 +40,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 12
+      - name: downloading modules
+        uses: actions/download-artifact@v2
+        with:
+          name: modules
       - name: building lib
         run: npm run build
   test:
@@ -45,12 +54,25 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 12
+      - name: downloading modules
+        uses: actions/download-artifact@v2
+        with:
+          name: modules
       - name: testing lib
         run: npm run test
+      - name: upload coverage
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-coverage
+          path: ./coverage
   coverage:
     needs: [ install, test ]
     runs-on: ubuntu-latest
     steps:
+      - name: download coverage
+        uses: actions/download-artifact@v2
+        with:
+          name: test-coverage
       - name: publish coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
