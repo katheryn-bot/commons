@@ -23,23 +23,32 @@ const checkDomain = (input: string): boolean => [
 ].includes(new URL(input).hostname)
 
 
-export const getQueryInstance = async (requestUrl: string): Promise<cheerio.Root> => {
+export const runCheerioInstance = async (
+  requestUrl: string,
+  actionQuery: string
+): Promise<cheerio.Cheerio> => {
   if (checkDomain(requestUrl)) {
     const page = await getPage(requestUrl)
-    const doc = cheerio.load(page)
+    const $ = cheerio.load(page)
 
-    return doc
+    return $(actionQuery)
   }
 
   throw new Error('invalid domain/host')
 }
 
-export const getPuppetInstance =  async (requestUrl: string): Promise<puppeteer.Page> => {
+export const runPuppetInstance =  async (
+  requestUrl: string,
+  actionQuery: string,
+): Promise<NodeListOf<Element>> => {
   if (checkDomain(requestUrl)) {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
 
-    return page
+    const elements = await page.evaluate(() =>
+      document.querySelectorAll(actionQuery))
+
+    return elements
   }
 
   throw new Error('invalid domain/host')

@@ -3,30 +3,31 @@ import { scrapper } from '../src'
 import { TESTING_URL } from './data/constants'
 
 test ('(UNIT) scrape-utils: GENERAL | INVALID URL', async (t) => {
-  await t.throwsAsync(scrapper.getQueryInstance('https://example.com'))
+  await t.throwsAsync(scrapper.runCheerioInstance('https://example.com', '_'))
 })
 
 test ('(UNIT) scrape-utils: GENERAL | INVALID PAGE', async (t) => {
-  await t.throwsAsync(scrapper.getQueryInstance(`${TESTING_URL}/somerandompage`))
+  await t.throwsAsync(scrapper.runCheerioInstance(`${TESTING_URL}/somerandompage`, '_'))
 })
 
 test ('(UNIT) scrape-utils: CHEERIO | FETCH DATA', async (t) => {
-  const instance = await scrapper.getQueryInstance(`${TESTING_URL}/Amos'_Bow`)
+  const instance = await scrapper.runCheerioInstance(
+    `${TESTING_URL}/Amos'_Bow`,
+    'h2.pi-item.pi-title'
+  )
 
-  const weaponTitle = instance('h2.pi-item.pi-title').text()
+  const weaponTitle = instance.text()
 
   t.is(weaponTitle, 'Amos\' Bow')
 })
 
-// testing this later...
-// test.skip('(UNIT) scrape-utils: PUPPET | FETCH DATA', async (t) => {
-//   const page = await scrapper.getPuppetInstance(`${TESTING_URL}/Amos'_Bow`)
+test.skip('(UNIT) scrape-utils: PUPPET | FETCH DATA', async (t) => {
+  const page = await scrapper.runPuppetInstance(
+    `${TESTING_URL}/Amos'_Bow`,
+    'h2.pi-item.pi-title'
+  )
 
-//   const weaponTitle = await page.evaluate(() =>
-//     document !== null || document !== undefined
-//       ? document.querySelector('h2.pi-item.pi-title').textContent
-//       : 'invalid-port'
-//   )
+  const weaponTitle = page.item(0).textContent;
 
-//   t.is(weaponTitle, 'Amos\' Bow')
-// })
+  t.is(weaponTitle, 'Amos\' Bow')
+})

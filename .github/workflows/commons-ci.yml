@@ -1,0 +1,42 @@
+name: build and test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node_version: 14
+      - name: install & build
+        run: npm i && npm run build
+      - uses: actions/cache@v2
+        name: cache modules
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: $${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node_version: 14
+      - name: install & test
+        run: npm i && npm run test
+      - name: publish coverage
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: 377d361f65561e14524d09d6b0ab938a2bebc37c144cb9230d1f9470119d45f5
