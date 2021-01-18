@@ -21,13 +21,13 @@ test ('(UNIT) scrape-utils: CHEERIO | FETCH DATA', async (t) => {
   t.is(weaponTitle, 'Amos\' Bow')
 })
 
-test.skip('(UNIT) scrape-utils: PUPPET | FETCH DATA', async (t) => {
-  const page = await scrapper.runPuppetInstance(
-    `${TESTING_URL}/Amos'_Bow`,
-    'h2.pi-item.pi-title'
-  )
+// test.skip('(UNIT) scrape-utils: PUPPET | FETCH DATA', async (t) => {
+//   const page = await scrapper.runPuppetInstance(
+//     `${TESTING_URL}/Amos'_Bow`,
+//     'h2.pi-item.pi-title'
+//   )
 
-  const weaponTitle = page.item(0).textContent;
+//   const weaponTitle = page.item(0).textContent;
 
-  t.is(weaponTitle, 'Amos\' Bow')
-})
+//   t.is(weaponTitle, 'Amos\' Bow')
+// })
