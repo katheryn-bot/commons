@@ -1,4 +1,3 @@
 import cheerio from 'cheerio';
-import puppeteer from 'puppeteer';
-export declare const getQueryInstance: (requestUrl: string) => Promise<cheerio.Root>;
-export declare const getPuppetInstance: (requestUrl: string) => Promise<puppeteer.Page>;
+export declare const runCheerioInstance: (requestUrl: string, actionQuery: string) => Promise<cheerio.Cheerio>;
+export declare const runPuppetInstance: (requestUrl: string, actionQuery: string) => Promise<NodeListOf<Element>>;
