@@ -8,7 +8,6 @@ import {
   Response,
 } from 'express'
 
-import { logger } from '../../'
 import responseTime from 'response-time'
 
 interface FormatOptions {
@@ -51,7 +50,7 @@ export class LoggerMiddleware implements NestMiddleware {
       time += `${res.statusMessage} (${res.statusCode})`
     }
 
-    logger.info(format({
+    console.log(format({
       time,
       path,
       method: method as MethodOptions,
