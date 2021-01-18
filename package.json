@@ -12,6 +12,10 @@
     "pretest": "export TS_NODE_FILES=true",
     "test": "npm run pretest && nyc --reporter lcov ava"
   },
+  "peerDependencies": {
+    "cheerio": ">=1.0.0-rc.5",
+    "puppeteer": ">=5.5.0"
+  },
   "dependencies": {
     "@nestjs/common": "^7.5.2",
     "@nestjs/core": "^7.5.2",
@@ -23,7 +27,6 @@
     "got": "^9.6.0",
     "helmet": "^4.2.0",
     "puppeteer": "^5.5.0",
-    "puppeteer-core": "^5.5.0",
     "reflect-metadata": "^0.1.13",
     "response-time": "^2.3.2",
     "rxjs": "^6.6.3",
