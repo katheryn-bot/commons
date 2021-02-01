@@ -19,9 +19,9 @@ export interface TypeORMConfig {
     host: string | '127.0.0.1';
 }
 export interface Config {
-    docs: string;
-    server: ServerConfig;
-    database: TypeORMConfig;
+    docPath: string;
+    server?: ServerConfig;
+    database?: TypeORMConfig;
     [constant: string]: any;
 }
 export declare const get: (path?: string | undefined) => Promise<Config>;
