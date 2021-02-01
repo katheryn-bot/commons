@@ -9,8 +9,8 @@ test ('(UNIT) config | FETCH DETAILS', async (t) => {
     constants,
   }  = await getConfig(join('__tests__', 'data/default.yml'))
 
-  t.true(server.port === 8000)
-  t.true(database.port === 5432)
+  t.true(server?.port === 8000)
+  t.true(database?.port === 5432)
   t.true(constants.testing.includes('very fun'))
   t.true(constants.value === 'SOME_CONSTANT_VALUE')
 })

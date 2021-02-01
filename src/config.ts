@@ -26,9 +26,9 @@ export interface TypeORMConfig {
 }
 
 export interface Config {
-  docs: string
-  server: ServerConfig
-  database: TypeORMConfig
+  docPath: string
+  server?: ServerConfig
+  database?: TypeORMConfig
   [constant: string]: any
 }
 
