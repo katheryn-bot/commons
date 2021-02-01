@@ -1,0 +1,4 @@
+server:
+  port: invalid-port
+database:
+  port: invalid-port

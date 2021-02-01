@@ -15,6 +15,10 @@ test ('(UNIT) config | FETCH DETAILS', async (t) => {
   t.true(constants.value === 'SOME_CONSTANT_VALUE')
 })
 
+test ('(UNIT) config | INVALID CONFIG', async (t) => {
+  await t.throwsAsync(getConfig(join('__tests__', 'data/invalid.yml')))
+})
+
 test ('(UNIT) config | INVALID PATH', async (t) => {
   await t.throwsAsync(getConfig('some/path/default.yml'))
 })

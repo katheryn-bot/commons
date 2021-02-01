@@ -27,9 +27,13 @@ export interface TypeORMConfig {
 
 export interface Config {
   docPath: string
-  server?: ServerConfig
-  database?: TypeORMConfig
+  server: ServerConfig
+  database: TypeORMConfig
   [constant: string]: any
+}
+
+const isValidPort = (port: number): boolean => {
+  return port !== 6000 && !isNaN(port)
 }
 
 export const get = async (path?: string): Promise<Config> => {
@@ -39,5 +43,12 @@ export const get = async (path?: string): Promise<Config> => {
 
   const contents = await readFile(configPath)
 
-  return load(contents.toString()) as Config
+  const config = load(contents.toString()) as Config
+  const { server, database } = config
+
+  if (!isValidPort(server.port) || !isValidPort(database.port)) {
+    throw new Error('The server/database port is invalid.')
+  }
+
+  return config
 }

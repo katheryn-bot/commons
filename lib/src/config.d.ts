@@ -20,8 +20,8 @@ export interface TypeORMConfig {
 }
 export interface Config {
     docPath: string;
-    server?: ServerConfig;
-    database?: TypeORMConfig;
+    server: ServerConfig;
+    database: TypeORMConfig;
     [constant: string]: any;
 }
 export declare const get: (path?: string | undefined) => Promise<Config>;

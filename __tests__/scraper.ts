@@ -8,7 +8,5 @@ test('SCRAPE FROM SITE', async (t) => {
 
   const scrapedResult = await scrapeContents(SCRAPE_URL, query)
 
-  console.log(scrapedResult.text())
-
   t.true(scrapedResult.text() === 'Majo-Senpai Nichijou')
 })
