@@ -1,3 +1,8 @@
-export { get as load } from './config'
-export { scrapeContents } from './scraper'
+export {
+  Config,
+  loadConfig,
+} from './config'
 export { CommonModule } from './rest/server'
+
+/// PIPES ///
+export { BodyParser } from './rest/pipes/parser'

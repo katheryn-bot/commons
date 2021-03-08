@@ -36,7 +36,7 @@ const isValidPort = (port: number): boolean => {
   return port !== 6000 && !isNaN(port)
 }
 
-export const get = async (path?: string): Promise<Config> => {
+export const loadConfig = async (path?: string): Promise<Config> => {
   const configPath = path === undefined
     ? join(process.cwd(), 'config/default.yml')
     : path

@@ -1,13 +1,13 @@
 import test from 'ava'
 import { join } from 'path'
-import { load as getConfig } from '../src'
+import { loadConfig as config } from '../src'
 
 test ('(UNIT) config | FETCH DETAILS', async (t) => {
   const {
     server,
     database,
     constants,
-  }  = await getConfig(join('__tests__', 'data/default.yml'))
+  }  = await config(join('__tests__', 'data/default.yml'))
 
   t.true(server?.port === 8000)
   t.true(database?.port === 5432)
@@ -16,9 +16,9 @@ test ('(UNIT) config | FETCH DETAILS', async (t) => {
 })
 
 test ('(UNIT) config | INVALID CONFIG', async (t) => {
-  await t.throwsAsync(getConfig(join('__tests__', 'data/invalid.yml')))
+  await t.throwsAsync(config(join('__tests__', 'data/invalid.yml')))
 })
 
 test ('(UNIT) config | INVALID PATH', async (t) => {
-  await t.throwsAsync(getConfig('some/path/default.yml'))
+  await t.throwsAsync(config('some/path/default.yml'))
 })

@@ -4,10 +4,16 @@
     "rootDir": "./",
     "outDir": "./lib",
     "baseUrl": "./src",
-    "declaration": true
+    "declaration": true,
+    "experimentalDecorators": true
   },
   "include": [
+    "__tests__",
     "index.d.ts",
     "src/**/*.ts"
+  ],
+  "exclude": [
+    "__tests__/data",
+    "__tests__/customs",
   ]
 }

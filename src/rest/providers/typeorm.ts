@@ -1,10 +1,10 @@
 import { createConnection } from 'typeorm'
-import { load as getConfig } from '../../'
+import { loadConfig } from '../../'
 
 export const TypeORMProvider = {
   provide: 'DATABASE_CONNECTION',
   useFactory: async () => {
-    const { database } = await getConfig()
+    const { database } = await loadConfig()
 
     const connection = await createConnection({
       ...database,
