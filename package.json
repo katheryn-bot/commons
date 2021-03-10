@@ -1,5 +1,5 @@
 {
-  "name": "@katheryne/commons",
+  "name": "@dmg/commons",
   "version": "0.1.0",
   "description": "katheryne's common code",
   "main": "lib/src/index.js",
