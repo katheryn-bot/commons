@@ -24,4 +24,4 @@ export interface Config {
     database: TypeORMConfig;
     [constant: string]: any;
 }
-export declare const get: (path?: string | undefined) => Promise<Config>;
+export declare const loadConfig: (path?: string | undefined) => Promise<Config>;
