@@ -1,5 +1,8 @@
 import test from 'ava'
-import { requestCard } from '../src/YGOProAPI'
+import {
+  calcPrice,
+  requestCard,
+} from '../src/YGOProAPI'
 
 test('YGOPRO WRAPPER | FETCH CARD', async (t) => {
   const name = 'Black Rose Dragon'
@@ -24,4 +27,9 @@ test('YGOPRO WRAPPER | SEARCH CARDS', async (t) => {
 
   t.is(incomingCards.data[0].name, 'Dark Magician')
   t.is(incomingCards.data[1].name, 'Dark Magician Girl')
+})
+
+test('YGOPRO WRAPPER | CALCULATE PRICE', async (t) => {
+  t.is(calcPrice('0.04'), 500)
+  t.is(calcPrice('5.40'), 3000)
 })

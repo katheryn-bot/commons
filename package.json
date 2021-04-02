@@ -12,6 +12,11 @@
     "pretest": "export TS_NODE_FILES=true",
     "test": "npm run pretest && nyc --reporter lcov ava"
   },
+  "peerDependencies": {
+    "winston": ">=3.x",
+    "typescript": ">=4.x",
+    "@types/winston": "^2.x"
+  },
   "dependencies": {
     "@nestjs/common": "^7.5.2",
     "@nestjs/core": "^7.5.2",

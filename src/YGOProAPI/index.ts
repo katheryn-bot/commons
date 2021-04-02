@@ -35,3 +35,18 @@ export const requestCard = ({
     .then((data) => resolve(data))
     .catch((error) => reject(error))
 })
+
+// INCREASE PRICE BY 500 FOR EVERY DOLLAR
+export const calcPrice = (price: string): number => {
+  let priceToFloat = 0
+  const segments = price.split('.')
+
+  if (segments[0] === '0') {
+    console.log(parseFloat(segments[1].split('').join('.')))
+    priceToFloat += Math.round(parseFloat(segments[1].split('').join('.'))) * 10
+  } else {
+    priceToFloat += parseInt(segments[0]) * 100
+  }
+
+  return ((priceToFloat / 2) + 50) * 10
+}
