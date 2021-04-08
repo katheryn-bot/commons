@@ -1,6 +1,7 @@
+import * as fs from 'fs'
 import { join } from 'path'
 import { load } from 'js-yaml'
-import { readFile } from 'fs/promises'
+import { ConnectionOptions as TypeORMConfig } from 'typeorm'
 
 export interface SecureConfig {
   key: string
@@ -11,18 +12,6 @@ export interface ServerConfig {
   port: number
   host?: string
   secure?: SecureConfig
-}
-
-export interface TypeORMConfig {
-  port: number
-  type: 'postgres'
-  database: string
-  username: string
-  password: string
-  entities: string[]
-  migrations: string[]
-  subscribers?: string[]
-  host: string | '127.0.0.1'
 }
 
 export interface Config {
@@ -36,19 +25,28 @@ const isValidPort = (port: number): boolean => {
   return port !== 6000 && !isNaN(port)
 }
 
-export const loadConfig = async (path?: string): Promise<Config> => {
+export const loadConfig = (path?: string): Config => {
+  const config = {}
+
   const configPath = path === undefined
     ? join(process.cwd(), 'config/default.yml')
     : path
+  console.log(configPath)
 
-  const contents = await readFile(configPath)
+  fs.readFile(configPath, (error, contents) => {
+    if (error) {
+      throw new Error(error.message)
+    } else {
+      const newConfig = load(contents.toString()) as Config
+      const { server } = newConfig
 
-  const config = load(contents.toString()) as Config
-  const { server, database } = config
+      if (!isValidPort(server.port)) {
+        throw new Error('Invalid server port.')
+      }
 
-  if (!isValidPort(server.port) || !isValidPort(database.port)) {
-    throw new Error('The server/database port is invalid.')
-  }
+      Object.assign(config, newConfig)
+    }
+  })
 
-  return config
+  return config as Config
 }

@@ -4,13 +4,14 @@ import {
   RequestMethod,
   MiddlewareConsumer,
 } from '@nestjs/common'
-import { LoggerMiddleware } from './middleware/logger'
 
-import { TypeORMProvider } from './providers/typeorm'
+import { LoggerMiddleware } from './middleware/logger'
+import { DatabaseModule } from './modules/database.module'
 
 @Module({
-  exports: [ TypeORMProvider ],
-  providers: [ TypeORMProvider ],
+  imports: [
+    DatabaseModule
+  ]
 })
 export class CommonModule implements NestModule {
 
