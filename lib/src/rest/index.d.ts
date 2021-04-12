@@ -1,3 +1,2 @@
 export { LoggerMiddleware } from './middleware/logger';
-export { DatabaseModule } from './modules/database.module';
-export { databaseProviders } from './providers/database.provider';
+export declare const DatabseModule: () => import("@nestjs/common").DynamicModule;

@@ -1,3 +1,12 @@
+import { loadConfig as config } from '../config'
+import { TypeOrmModule } from '@nestjs/typeorm'
+
 export { LoggerMiddleware } from './middleware/logger'
-export { DatabaseModule } from './modules/database.module'
-export { databaseProviders } from './providers/database.provider'
+
+export const DatabseModule = () => {
+  const { database: DATABASE_CONFIG } = config()
+
+  return TypeOrmModule.forRoot({
+    ...DATABASE_CONFIG
+  })
+}
