@@ -1,6 +1,6 @@
-import * as fs from 'fs'
 import { join } from 'path'
 import { load } from 'js-yaml'
+import * as fs from 'fs/promises'
 import { ConnectionOptions as TypeORMConfig } from 'typeorm'
 
 export interface SecureConfig {
@@ -21,32 +21,9 @@ export interface Config {
   [constant: string]: any
 }
 
-const isValidPort = (port: number): boolean => {
-  return port !== 6000 && !isNaN(port)
-}
+export const get = async (path?: string): Promise<Config> => {
+  if (!path) path = join(process.cwd(), '/config/default.yml')
+  const contents = await fs.readFile(path)
 
-export const loadConfig = (path?: string): Config => {
-  const config = {}
-
-  const configPath = path === undefined
-    ? join(process.cwd(), 'config/default.yml')
-    : path
-  console.log(configPath)
-
-  fs.readFile(configPath, (error, contents) => {
-    if (error) {
-      throw new Error(error.message)
-    } else {
-      const newConfig = load(contents.toString()) as Config
-      const { server } = newConfig
-
-      if (!isValidPort(server.port)) {
-        throw new Error('Invalid server port.')
-      }
-
-      Object.assign(config, newConfig)
-    }
-  })
-
-  return config as Config
+  return load(String(contents)) as Config
 }

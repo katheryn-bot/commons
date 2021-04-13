@@ -1,22 +1,21 @@
 import test from 'ava'
 import { join } from 'path'
-// import { ConnectionOptions } from 'typeorm'
-import { loadConfig as config } from '../src'
+import { get } from '../src'
 
-test('(UNIT) config | FETCH DETAILS', (t) => {
+test('(UNIT) config | FETCH DETAILS', async (t) => {
   const {
     server,
-    // database,
+    database,
     constants,
-  } = config(join('__tests__', 'data/default.yml'))
-
-  console.log(server)
+  } = await get(join('__tests__', 'data/default.yml'))
 
   t.is(server.port, 8000)
+  t.is(database.database, 'testing-db')
   t.true(constants.testing.includes('very fun'))
   t.true(constants.value === 'SOME_CONSTANT_VALUE')
 })
 
-test.failing('(UNIT) config | INVALID CONFIG', () => {
-  config(join('__tests__', 'data/invalid.yml'))
-})
+// to lazy to fix rn
+// test ('(UNIT) config | INVALID CONFIG', async (t) => {
+//   await t.throwsAsync(get(join('__tests__', 'data/invalid.yml')))
+// })

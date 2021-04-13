@@ -13,9 +13,6 @@
     "test": "npm run pretest && nyc --reporter lcov ava"
   },
   "peerDependencies": {
-    "pg": ">=8.5.x",
-    "typeorm": ">=0.2.x",
-    "@nestjs/typeorm": "^7.x",
     "@types/winston": "^2.x",
     "typescript": ">=4.x",
     "winston": ">=3.x"
@@ -23,7 +20,6 @@
   "dependencies": {
     "@nestjs/common": "^7.5.2",
     "@nestjs/core": "^7.5.2",
-    "@nestjs/typeorm": "^7.1.5",
     "body-parser": "^1.19.0",
     "cors": ">=2.1.5",
     "express": "^4.17.1",
@@ -33,8 +29,7 @@
     "node-fetch": "^2.6.1",
     "reflect-metadata": "^0.1.13",
     "response-time": "^2.3.2",
-    "rxjs": "^6.6.3",
-    "typeorm": "^0.2.32"
+    "rxjs": "^6.6.3"
   },
   "devDependencies": {
     "@alex-taxiera/eslint-config-ts": "^1.3.2",
