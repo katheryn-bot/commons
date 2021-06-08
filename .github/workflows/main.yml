@@ -1,0 +1,31 @@
+name: Dark Magician Commons (DMC)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  base:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node_version: 14
+      - name: BUILD
+        run: npm i && npm run build
+      - name: TEST
+        run: npm run test
+      - uses: actions/cache@v2
+        name: CACHE
+        env:
+          cache-name: NODE_MODULES
+        with:
+          path: ~/.npm
+          key: $${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      - name: COVERAGE
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: ~
